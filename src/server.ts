@@ -15,7 +15,7 @@ app.get('/projetos/:id', async (req, res) => {
           return res.status(400).json({ error: "ID deve ser um número válido" });
       }
 
-      const projectExists = await prisma.Project.findUnique({
+      const projectExists = await prismaClient.Project.findUnique({
           where: { id: intId }
       });
 
@@ -24,7 +24,7 @@ app.get('/projetos/:id', async (req, res) => {
       }
 
       // Atualiza as views do projeto
-      const updateViewsProject = await prisma.Project.update({
+      const updateViewsProject = await prismaClient.Project.update({
           where: { id: intId },
           data: {
               views: projectExists.views + 1
